@@ -1,0 +1,13 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+ <title>pexeso04</title>
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <rect id="svg_1" height="201" width="201" y="-0.5" x="-0.5" fill="#4e4e60"/>
+  <rect rx="10" id="svg_2" height="50" width="48" y="75" x="76" fill="#f8da59"/>
+  <rect rx="10" stroke-width="15" id="svg_3" height="100" width="112" y="50" x="44" stroke="#f8da59" fill="none"/>
+  <rect id="svg_4" height="0" width="1" y="19.3335" x="378" stroke="#f8da59" fill="none"/>
+  <line id="svg_6" y2="219.46905" x2="100" y1="-16.6665" x1="100" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <line id="svg_8" y2="100" x2="246.11226" y1="100" x1="-39" stroke-width="15" stroke="#f8da59" fill="none"/>
+ </g>
+
+</svg>

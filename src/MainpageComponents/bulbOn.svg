@@ -1,0 +1,19 @@
+<svg width="149.99999999999997" height="200" xmlns="http://www.w3.org/2000/svg">
+ <title>bulb</title>
+
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <path fill="#f8da59" stroke="#f5f5f5" d="m102.97382,133.84783c0.43358,-3.1012 7.20466,-31.19585 24.53303,-58.87557c9.73469,-29.62402 -6.52774,-50.28377 -30.39997,-60.13555c-23.76114,-11.03381 -55.41866,-2.69843 -68.84686,18.92208c-12.93817,17.85911 -10.46901,42.12464 2.17643,59.49248c12.64544,17.36783 16.22168,32.23611 15.04901,49.9005c18.7293,0 37.45861,0 56.18793,0c0.4335,-3.10127 0.86686,-6.20274 1.30044,-9.30394l-0.00001,0zm21.11704,-114.26666l-0.00012,0l0.00012,0z" id="svg_3" stroke-width="2"/>
+  <rect fill="none" stroke="#f5f5f5" x="41.56399" y="142.57653" width="65.76923" height="8.84616" id="svg_5" rx="10" stroke-width="2.5"/>
+  <rect fill="none" stroke="#f5f5f5" x="41.56399" y="151.07296" width="65.76923" height="8.84616" id="svg_7" rx="10" stroke-width="2.5"/>
+  <rect fill="none" stroke="#f5f5f5" x="41.17937" y="159.18643" width="65.76923" height="8.84616" id="svg_8" rx="10" stroke-width="2.5"/>
+  <rect fill="none" stroke="#f5f5f5" x="41.17937" y="168.03258" width="65.76923" height="8.84616" id="svg_9" rx="10" stroke-width="2.5"/>
+  <rect fill="none" stroke="#f5f5f5" x="58.87168" y="176.87874" width="27.69231" height="8.84616" id="svg_10" rx="5" stroke-width="2.5"/>
+  <line fill="none" stroke="#f5f5f5" x1="57.1916" y1="142.08365" x2="57.1916" y2="75.45521" id="svg_12"/>
+  <line fill="none" stroke="#f5f5f5" x1="57.1916" y1="142.08365" x2="57.1916" y2="75.45521" id="svg_13" stroke-width="2"/>
+  <line fill="none" stroke="#f5f5f5" x1="89.117" y1="142.08365" x2="89.117" y2="75.45521" id="svg_15" stroke-width="2"/>
+  <ellipse fill="none" stroke="#f5f5f5" cx="56.23007" cy="83.81442" id="svg_16" rx="8.26923" ry="8.26923" stroke-width="2"/>
+  <ellipse fill="none" stroke="#f5f5f5" cx="89.32734" cy="83.81442" id="svg_17" rx="8.26923" ry="8.26923" stroke-width="2"/>
+  <ellipse fill="none" stroke="#f5f5f5" cx="72.67745" cy="83.81442" id="svg_18" rx="8.26923" ry="8.26923" stroke-width="2"/>
+ </g>
+</svg>

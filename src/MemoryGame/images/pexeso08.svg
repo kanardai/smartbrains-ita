@@ -1,0 +1,20 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+ <title>pexeso08</title>
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <rect id="svg_1" height="201" width="201" y="-0.5" x="-0.5" fill="#4e4e60"/>
+  <rect rx="10" id="svg_2" height="50" width="48" y="75" x="76" fill="#f8da59"/>
+  <rect rx="10" stroke-width="15" id="svg_3" height="100" width="112" y="50" x="44" stroke="#f8da59" fill="none"/>
+  <rect id="svg_4" height="0" width="1" y="19.3335" x="378" stroke="#f8da59" fill="none"/>
+  <path id="svg_10" d="m68.90323,-19.31167l62.19355,0l0,69l-62.19355,0l0,-69z" opacity="undefined" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <rect id="svg_14" height="0" width="3.87097" y="118.06452" x="184.51614" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <line id="svg_16" y2="-7.45809" x2="100" y1="50.32259" x1="100" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <path id="svg_17" d="m68.90323,151.01092l62.19355,0l0,69l-62.19355,0l0,-69z" opacity="undefined" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <line id="svg_18" y2="154.47741" x2="100" y1="212.25809" x1="100" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <path transform="rotate(90, 190.968, 100)" id="svg_20" d="m159.87097,65.5l62.19355,0l0,69l-62.19355,0l0,-69z" opacity="undefined" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <line transform="rotate(90, 177.419, 100)" id="svg_21" y2="71.10966" x2="177.41936" y1="128.89033" x1="177.41936" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <path transform="rotate(90, 9.03251, 100)" id="svg_22" d="m-22.06452,65.5l62.19355,0l0,69l-62.19355,0l0,-69z" opacity="undefined" stroke-width="15" stroke="#f8da59" fill="none"/>
+  <line transform="rotate(90, 13.548, 100)" id="svg_23" y2="71.10966" x2="13.54839" y1="128.89033" x1="13.54839" stroke-width="15" stroke="#f8da59" fill="none"/>
+ </g>
+
+</svg>
