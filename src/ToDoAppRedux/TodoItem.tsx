@@ -9,11 +9,20 @@ type Props = {
   todoItem: Todo;
   completeTodo: (id: string) => void;
   deleteTodoButton: (id: string) => void;
+  dragStart: (e: React.DragEvent<HTMLDivElement>, id: string) => void;
+  dragEnter: (e: React.DragEvent<HTMLDivElement>, id: string) => void;
+  dragEnd: (e: React.DragEvent<HTMLDivElement>) => void;
 };
 
 export const TodoItem = (p: Props) => {
   return (
-    <Div_TodoItem>
+    <Div_TodoItem
+      draggable
+      onDragStart={(e) => p.dragStart(e, p.todoItem.id)}
+      onDragEnter={(e) => p.dragEnter(e, p.todoItem.id)}
+      onDragEnd={p.dragEnd}
+      key={p.todoItem.id}
+    >
       <Btn_Style
         onClick={() => p.completeTodo(p.todoItem.id)}
         complete={p.todoItem.complete}

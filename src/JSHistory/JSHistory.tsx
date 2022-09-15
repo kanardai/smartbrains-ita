@@ -3,7 +3,7 @@ import { HistoryPoint } from './components/HistoryPoint';
 import { MainPage } from './components/MainPage';
 import { Helmet } from 'react-helmet';
 import { colors, mediaSize } from '../utils/theme';
-import arrow from '../MainpageComponents/arrow-thumb.svg';
+import arrow from '../MainpageComponents/images/arrow-thumb.svg';
 
 export function JSHistory() {
   return (

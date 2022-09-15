@@ -27,12 +27,19 @@ type BtnContentType =
   | 'chartPayment'
   | 'chartMortgage'
   | 'tablePayment'
-  | 'tablePaymentInflation'
+  | 'chartPropertyValue'
   | 'chartPaymentInflation'
   | 'chartMortgageInflation';
 
 const inflationCalc = (numWithoutInflation: number, inflation: number) => {
   return numWithoutInflation * (1 - inflation / 100 / 12);
+};
+
+const propertyValueInflationCalc = (
+  numWithoutInflation: number,
+  inflation: number
+) => {
+  return numWithoutInflation * (1 + inflation / 100 / 12);
 };
 
 const amortizationCalc = (arg: {
@@ -67,6 +74,7 @@ const mortgageDataCalculator = (arg: {
   let restMortgage = arg.howMuch;
   let payment = firstPayment;
   let paymentInflation = firstPayment;
+  let propertyValue = arg.howMuch;
 
   const paymentsArr = monthsArr.map((period, index) => {
     const interestRate = arg.interestRate;
@@ -86,6 +94,7 @@ const mortgageDataCalculator = (arg: {
     amortizationInflation = inflationCalc(amortization, arg.inflation);
     paymentInflation = inflationCalc(paymentInflation, arg.inflation);
     mortgageValueInflation = inflationCalc(restMortgage, arg.inflation);
+    propertyValue = propertyValueInflationCalc(propertyValue, arg.inflation);
 
     return {
       period: index,
@@ -101,16 +110,17 @@ const mortgageDataCalculator = (arg: {
       mortgageValueInflation: Math.ceil(
         inflationCalc(restMortgage, arg.inflation)
       ),
+      propertyValue: Math.ceil(propertyValue),
     };
   });
   return paymentsArr;
 };
 
 export const MortgageCalculator = () => {
-  const [howMuch, setHowMuch] = useState(0);
-  const [interestRate, setInterestRate] = useState(0);
-  const [months, setMonths] = useState(0);
-  const [inflation, setInflation] = useState(0);
+  const [howMuch, setHowMuch] = useState(1000000);
+  const [interestRate, setInterestRate] = useState(5);
+  const [months, setMonths] = useState(120);
+  const [inflation, setInflation] = useState(3);
   const [contentHandler, setContentHandler] = useState(
     'chartPayment' as BtnContentType
   );
@@ -128,8 +138,6 @@ export const MortgageCalculator = () => {
     setInterestRate(0);
     setMonths(0);
   };
-
-  const isMobile = window.innerWidth < 800;
 
   return (
     <Div_Container_Mortgage>
@@ -237,10 +245,10 @@ export const MortgageCalculator = () => {
             </Btn_Chart>
             <Btn_Chart
               type='button'
-              onClick={() => setContentHandler('tablePaymentInflation')}
-              isActive={contentHandler === 'tablePaymentInflation'}
+              onClick={() => setContentHandler('chartPropertyValue')}
+              isActive={contentHandler === 'chartPropertyValue'}
             >
-              Inflation Table
+              Property Value Chart
             </Btn_Chart>
             <Btn_Chart
               type='button'
@@ -283,14 +291,12 @@ export const MortgageCalculator = () => {
             <Table_Styled>
               <thead>
                 <tr>
-                  <Th_Styled>{isMobile ? 'Y' : 'year'}</Th_Styled>
-                  <Th_Styled>{isMobile ? 'M' : 'month'}</Th_Styled>
-                  <Th_Styled>{isMobile ? 'payme..' : 'payment'}</Th_Styled>
-                  <Th_Styled>
-                    {isMobile ? 'amortiz..' : 'amortization'}
-                  </Th_Styled>
-                  <Th_Styled>{isMobile ? 'inter..' : 'interest'}</Th_Styled>
-                  <Th_Styled>mortgage</Th_Styled>
+                  <Th_Styled>Year</Th_Styled>
+                  <Th_Styled>Month</Th_Styled>
+                  <Th_Styled>Payment</Th_Styled>
+                  <Th_Styled>Amortization</Th_Styled>
+                  <Th_Styled>Interest</Th_Styled>
+                  <Th_Styled>Mortgage</Th_Styled>
                 </tr>
               </thead>
               <tbody>
@@ -308,33 +314,8 @@ export const MortgageCalculator = () => {
             </Table_Styled>
           )}
 
-          {contentHandler === 'tablePaymentInflation' && (
-            <Table_Styled>
-              <thead>
-                <tr>
-                  <Th_Styled>{isMobile ? 'Y' : 'year'}</Th_Styled>
-                  <Th_Styled>{isMobile ? 'M' : 'month'}</Th_Styled>
-                  <Th_Styled>{isMobile ? 'payme..' : 'payment'}</Th_Styled>
-                  <Th_Styled>
-                    {isMobile ? 'amortiz..' : 'amortization'}
-                  </Th_Styled>
-                  <Th_Styled>{isMobile ? 'inter..' : 'interest'}</Th_Styled>
-                  <Th_Styled>mortgage</Th_Styled>
-                </tr>
-              </thead>
-              <tbody>
-                {paymentsArr.map((payment) => (
-                  <tr key={payment.period}>
-                    <Td_Styled>{payment.year}</Td_Styled>
-                    <Td_Styled>{payment.month}</Td_Styled>
-                    <Td_Styled>{payment.paymentInflation}</Td_Styled>
-                    <Td_Styled>{payment.amortizationInflation}</Td_Styled>
-                    <Td_Styled>{payment.interestInflation}</Td_Styled>
-                    <Td_Styled>{payment.mortgageValueInflation}</Td_Styled>
-                  </tr>
-                ))}
-              </tbody>
-            </Table_Styled>
+          {contentHandler === 'chartPropertyValue' && (
+            <ChartPropertyValue paymentChartData={paymentsArr} />
           )}
         </Div_Content>
       )}
@@ -354,6 +335,7 @@ type ChartData = {
   interestInflation: number;
   mortgageValue: number;
   mortgageValueInflation: number;
+  propertyValue: number;
 };
 
 type ChartProps = {
@@ -364,12 +346,12 @@ const ChartPayment = (props: ChartProps) => {
   return (
     <ResponsiveContainer width='90%' aspect={1 / 0.7}>
       <LineChart>
-        <CartesianGrid strokeDasharray='2 7' stroke='#b3b3ba' />
+        <CartesianGrid strokeDasharray='2 7' stroke={colors.secondaryDarker} />
         <XAxis
           dataKey='period'
           domain={['0', 'auto']}
           xAxisId={'benchmark'}
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           dy={5}
           label={{
             value: 'Months',
@@ -382,7 +364,7 @@ const ChartPayment = (props: ChartProps) => {
           domain={['0', 'auto']}
           width={3}
           orientation='right'
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           tickCount={8}
           textAnchor='end'
           dy={10}
@@ -395,13 +377,13 @@ const ChartPayment = (props: ChartProps) => {
           }}
         />
         <Legend />
-        <Tooltip contentStyle={{ backgroundColor: '#4e4e60' }} />
+        <Tooltip contentStyle={{ backgroundColor: colors.primary }} />
         <Line
           xAxisId={'benchmark'}
           type='monotone'
           data={props.paymentChartData}
           dataKey='amortization'
-          stroke='#F8DA59'
+          stroke={colors.highlight}
           name='amortization'
         />
         <Line
@@ -409,7 +391,7 @@ const ChartPayment = (props: ChartProps) => {
           type='monotone'
           data={props.paymentChartData}
           dataKey='interest'
-          stroke='whitesmoke'
+          stroke={colors.secondary}
           name='interest'
         />
       </LineChart>
@@ -421,12 +403,12 @@ const ChartPaymentInflation = (props: ChartProps) => {
   return (
     <ResponsiveContainer width='90%' aspect={1 / 0.7}>
       <LineChart>
-        <CartesianGrid strokeDasharray='2 7' stroke='#b3b3ba' />
+        <CartesianGrid strokeDasharray='2 7' stroke={colors.secondaryDarker} />
         <XAxis
           dataKey='period'
           domain={['0', 'auto']}
           xAxisId={'benchmark'}
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           dy={5}
           label={{
             value: 'Months',
@@ -439,7 +421,7 @@ const ChartPaymentInflation = (props: ChartProps) => {
           domain={['0', 'auto']}
           width={3}
           orientation='right'
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           tickCount={8}
           textAnchor='end'
           dy={10}
@@ -452,13 +434,13 @@ const ChartPaymentInflation = (props: ChartProps) => {
           }}
         />
         <Legend />
-        <Tooltip contentStyle={{ backgroundColor: '#4e4e60' }} />
+        <Tooltip contentStyle={{ backgroundColor: colors.primary }} />
         <Line
           xAxisId={'benchmark'}
           type='monotone'
           data={props.paymentChartData}
           dataKey='amortizationInflation'
-          stroke='#F8DA59'
+          stroke={colors.highlight}
           name='amortization'
         />
         <Line
@@ -466,7 +448,7 @@ const ChartPaymentInflation = (props: ChartProps) => {
           type='monotone'
           data={props.paymentChartData}
           dataKey='interestInflation'
-          stroke='whitesmoke'
+          stroke={colors.secondary}
           name='interest'
         />
       </LineChart>
@@ -478,11 +460,11 @@ const ChartMortgage = (props: ChartProps) => {
   return (
     <ResponsiveContainer width='90%' aspect={1 / 0.7}>
       <LineChart>
-        <CartesianGrid strokeDasharray='2 7' stroke='#b3b3ba' />
+        <CartesianGrid strokeDasharray='2 7' stroke={colors.secondaryDarker} />
         <XAxis
           dataKey='period'
           domain={['0', 'auto']}
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           dy={5}
           label={{
             value: 'Months',
@@ -495,7 +477,7 @@ const ChartMortgage = (props: ChartProps) => {
           domain={['0', 'auto']}
           width={3}
           orientation='right'
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           tickCount={8}
           textAnchor='end'
           dy={10}
@@ -508,12 +490,12 @@ const ChartMortgage = (props: ChartProps) => {
           }}
         />
         <Legend />
-        <Tooltip contentStyle={{ backgroundColor: '#4e4e60' }} />
+        <Tooltip contentStyle={{ backgroundColor: colors.primary }} />
         <Line
           type='monotone'
           data={props.paymentChartData}
           dataKey='mortgageValue'
-          stroke='#F8DA59'
+          stroke={colors.highlight}
           name='Mortgage'
         />
       </LineChart>
@@ -525,11 +507,11 @@ const ChartMortgageInflation = (props: ChartProps) => {
   return (
     <ResponsiveContainer width='90%' aspect={1 / 0.7}>
       <LineChart>
-        <CartesianGrid strokeDasharray='2 7' stroke='#b3b3ba' />
+        <CartesianGrid strokeDasharray='2 7' stroke={colors.secondaryDarker} />
         <XAxis
           dataKey='period'
           domain={['0', 'auto']}
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           dy={5}
           label={{
             value: 'Months',
@@ -542,7 +524,7 @@ const ChartMortgageInflation = (props: ChartProps) => {
           domain={['0', 'auto']}
           width={3}
           orientation='right'
-          stroke='#b3b3ba'
+          stroke={colors.secondaryDarker}
           tickCount={8}
           textAnchor='end'
           dy={10}
@@ -555,12 +537,59 @@ const ChartMortgageInflation = (props: ChartProps) => {
           }}
         />
         <Legend />
-        <Tooltip contentStyle={{ backgroundColor: '#4e4e60' }} />
+        <Tooltip contentStyle={{ backgroundColor: colors.primary }} />
         <Line
           type='monotone'
           data={props.paymentChartData}
           dataKey='mortgageValueInflation'
-          stroke='#F8DA59'
+          stroke={colors.highlight}
+          name='Mortgage'
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+};
+
+const ChartPropertyValue = (props: ChartProps) => {
+  return (
+    <ResponsiveContainer width='90%' aspect={1 / 0.7}>
+      <LineChart>
+        <CartesianGrid strokeDasharray='2 7' stroke={colors.secondaryDarker} />
+        <XAxis
+          dataKey='period'
+          domain={['0', 'auto']}
+          stroke={colors.secondaryDarker}
+          dy={5}
+          label={{
+            value: 'Months',
+            fill: 'whitesmoke',
+            dy: -30,
+          }}
+        />
+
+        <YAxis
+          domain={['0', 'auto']}
+          width={3}
+          orientation='right'
+          stroke={colors.secondaryDarker}
+          tickCount={8}
+          textAnchor='end'
+          dy={10}
+          dx={-15}
+          label={{
+            value: 'CZK',
+            fill: colors.secondary,
+            angle: -90,
+            dx: -20,
+          }}
+        />
+        <Legend />
+        <Tooltip contentStyle={{ backgroundColor: colors.primary }} />
+        <Line
+          type='monotone'
+          data={props.paymentChartData}
+          dataKey='propertyValue'
+          stroke={colors.highlight}
           name='Mortgage'
         />
       </LineChart>
@@ -597,13 +626,14 @@ const Div_Sidebar = styled.div`
     margin-bottom: 15px;
     border-bottom: solid 2px ${colors.secondary};
     padding-bottom: 25px;
+    margin: 0 auto;
   }
 
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  width: 270px;
   height: 100%;
 `;
 
@@ -713,6 +743,11 @@ const Td_Styled = styled.td`
   padding: 3px;
 `;
 const Th_Styled = styled.th`
+  @media (${mediaSize.mediaMobile}) {
+    max-width: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   color: ${colors.primary};
   background-color: ${colors.highlight};
   border-radius: 3px;
@@ -733,7 +768,7 @@ const Btn_Chart = styled.button<Props_Btn_Chart>`
     props.isActive ? colors.highlight : colors.secondary};
   border-radius: 20px;
   margin: 10px;
-  font-size: 15px;
+  font-size: 14px;
 
   color: ${colors.secondary};
   &:active {

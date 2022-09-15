@@ -147,7 +147,7 @@ export const Div_ErrorMessage = styled.div`
   height: 300px;
   top: 105px;
   left: calc(50vw - (300px / 2));
-  border: solid 10px ${colors.highlight};
+  border: solid 10px ${colors.error};
   border-radius: 30px;
   color: ${colors.secondary};
   padding: 5px;

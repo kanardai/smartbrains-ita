@@ -1,16 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  compareUrlsFetch,
-  deleteArticleFetch,
-  getArticleFetch,
-  getArticlesFetch,
-  postArticleFetch,
-} from '../utils/apiEndpoints';
 import { checkUrlSymbol } from '../utils/checkUrlSymbol';
 import { delay } from '../utils/delay';
 import { genericHookContextBuilder } from '../utils/genericHookContextBuilder';
 import { concatUrl, urls } from '../utils/urls';
+import { services } from '../utils/apiEndpoints';
 
 export type Article = {
   title: string;
@@ -32,8 +26,8 @@ const useLogicState = () => {
   const getArticles = async () => {
     try {
       setLoading(true);
-      const response = await getArticlesFetch();
-      setArticleList(await response.json());
+      const articles = await services.articles.getArticlesFetch();
+      setArticleList(await articles);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -44,8 +38,8 @@ const useLogicState = () => {
   const getArticle = async (slug: string) => {
     try {
       setLoading(true);
-      const response = await getArticleFetch(slug);
-      setArticle(await response.json());
+      const article = await services.articles.getArticleFetch(slug);
+      setArticle(await article);
       setLoading(false);
       return article;
     } catch (error) {
@@ -57,7 +51,7 @@ const useLogicState = () => {
   const postArticle = async (article: Article) => {
     try {
       setLoading(true);
-      const response = await postArticleFetch(article);
+      const response = await services.articles.postArticleFetch(article);
       if (!response.ok) throw new Error(`response not ok: ${response.status}`);
       setTitle('');
       setUrlSlug('');
@@ -74,7 +68,7 @@ const useLogicState = () => {
   const compareUrls = async (urlString: string) => {
     try {
       setLoading(true);
-      const response = await compareUrlsFetch(urlString);
+      const response = await services.articles.compareUrlsFetch(urlString);
       setCompareUrls(await response.json());
       setLoading(false);
     } catch (error: any) {
@@ -87,7 +81,7 @@ const useLogicState = () => {
   const deleteArticle = async (slug: string) => {
     try {
       setLoading(true);
-      const response = await deleteArticleFetch(slug);
+      const response = await services.articles.deleteArticleFetch(slug);
       if (!response.ok) throw 'Server Error';
     } catch (error: any) {
       setErrorMessage(error);

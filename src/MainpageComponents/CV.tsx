@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { colors, mediaSize } from '../utils/theme';
 import foto from './foto.jpg';
+import { cvData } from './cvData';
 
 export const CV = () => {
   return (
@@ -11,92 +12,37 @@ export const CV = () => {
 
       <Table_Styled>
         <tbody>
-          <Tr_Styled>
-            <Td_Col1>Name</Td_Col1>
-            <Td_Col2>Aneta D.</Td_Col2>
-          </Tr_Styled>
-
-          <Tr_Empty />
-
-          <Tr_Styled>
-            <Td_Col1>Languages</Td_Col1>
-            <Td_Col2>English B1, German B2</Td_Col2>
-          </Tr_Styled>
-
-          <Tr_Empty />
-
-          <Tr_Styled>
-            <Td_Col1>Education</Td_Col1>
-            <Td_Col2>University of West Bohemia</Td_Col2>
-          </Tr_Styled>
-          <Tr_Empty />
-          <Tr_Styled>
-            <Td_Col1
-              css={css`
-                color: ${colors.secondary};
-              `}
-            >
-              Bachelor Degree
-            </Td_Col1>
-            <Td_Col2>Computational Modeling in Mechanics</Td_Col2>
-          </Tr_Styled>
-          <Tr_Styled>
-            <Td_Col1 />
-            <Td_Col2>Faculty of Applied Sciences</Td_Col2>
-          </Tr_Styled>
-          <Tr_Empty />
-          <Tr_Styled>
-            <Td_Col1
-              css={css`
-                color: ${colors.secondary};
-              `}
-            >
-              Master Degree
-            </Td_Col1>
-            <Td_Col2>Production and Logistics Management</Td_Col2>
-          </Tr_Styled>
-          <Tr_Styled>
-            <Td_Col1 />
-            <Td_Col2>Faculty of Mechanical Engineering</Td_Col2>
-          </Tr_Styled>
-          <Tr_Empty />
-          <Tr_Styled>
-            <Td_Col1>Work Experinces</Td_Col1>
-            <Td_Col2 />
-          </Tr_Styled>
-          <Tr_Empty />
-          <Tr_Styled>
-            <Td_Col1
-              css={css`
-                color: ${colors.secondary};
-              `}
-            >
-              2016-2022
-            </Td_Col1>
-            <Td_Col2>Air surveillance and NATO Air Policing</Td_Col2>
-          </Tr_Styled>
-          <Tr_Styled>
-            <Td_Col1 />
-            <Td_Col2>Czech Air Force</Td_Col2>
-          </Tr_Styled>
-          <Tr_Empty />
-          <Tr_Styled>
-            <Td_Col1
-              css={css`
-                color: ${colors.secondary};
-              `}
-            >
-              2022
-            </Td_Col1>
-            <Td_Col2>Trainee program IT Absolvent</Td_Col2>
-          </Tr_Styled>
-          <Tr_Styled>
-            <Td_Col1 />
-            <Td_Col2>Smartbrains solutions s.r.o.</Td_Col2>
-          </Tr_Styled>
+          {cvData.map((data, index) => (
+            <TableTr
+              key={index}
+              index={index}
+              col1={data.col1}
+              col2={data.col2}
+              cssStyle={data.cssStyle}
+            />
+          ))}
         </tbody>
       </Table_Styled>
     </Div_Container>
+  );
+};
+
+type Props = {
+  cssStyle?: string;
+  col1: string;
+  col2: string;
+  index: number;
+};
+
+export const TableTr = (p: Props) => {
+  return (
+    <Tr_Styled>
+      <Td_Col1 cssStyle={p.cssStyle}>{p.col1}</Td_Col1>
+      <Td_Col2>
+        {p.col2}
+        <Tr_Empty />
+      </Td_Col2>
+    </Tr_Styled>
   );
 };
 
@@ -129,16 +75,19 @@ const Table_Styled = styled.table`
   width: 350px;
   margin: 10px 20px;
 `;
+
 const Tr_Styled = styled.tr`
   line-height: 17px;
 `;
 const Tr_Empty = styled.tr`
   height: 6px;
 `;
-
-const Td_Col1 = styled.td`
+type Props_Td_Styled = {
+  cssStyle?: string;
+};
+const Td_Col1 = styled.td<Props_Td_Styled>`
   font-size: smaller;
-  color: ${colors.highlight};
+  color: ${(props) => (props.cssStyle ? props.cssStyle : colors.highlight)};
   width: 33%;
 `;
 const Td_Col2 = styled.td`

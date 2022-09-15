@@ -85,8 +85,6 @@ export const TodoPage = () => {
 export const NewTodo = () => {
   const logic = useContext(TodosContext);
 
-  const isMobile = window.innerWidth < 800;
-
   return (
     <div
       css={css`
@@ -101,7 +99,7 @@ export const NewTodo = () => {
           <Input_Todo
             type='text'
             placeholder='What needs to be done?'
-            maxLength={isMobile ? 10 : 35}
+            maxLength={20}
             value={logic.todoName}
             onChange={(e) => logic.setTodoName(e.target.value)}
           />

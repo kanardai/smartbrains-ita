@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { colors, mediaSize } from './utils/theme';
 import { Helmet } from 'react-helmet';
 import { Sidebar } from './MainpageComponents/Sidebar';
-import arrowThumb from './MainpageComponents/arrow-thumb.svg';
+import arrowThumb from './MainpageComponents/images/arrow-thumb.svg';
 import { ADLogo } from './MainpageComponents/ADLogo';
 import { Technologies } from './MainpageComponents/Technologies';
 import { Apps } from './MainpageComponents/Apps';
@@ -41,6 +41,7 @@ const Div_Container = styled.div`
   display: flex;
   @media (${mediaSize.mediaMobile}) {
     overflow-y: hidden;
+    
   }
 
   @media (${mediaSize.mediaLaptop}) {
@@ -71,17 +72,14 @@ const Div_OuterWrapper = styled.div`
       background-repeat: no-repeat;
       background-position: center;
     }
-    
   }
 `;
 
 const Div_Slide = styled.div`
   background: ${colors.primaryDarker};
   min-width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
-<a href="https://ibb.co/fQswQPZ"><img src="https://i.ibb.co/DLZ2LSm/jshistory.jpg" alt="jshistory" border="0"></a>

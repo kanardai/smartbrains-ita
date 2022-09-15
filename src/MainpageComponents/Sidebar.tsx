@@ -8,6 +8,22 @@ export const Sidebar = () => {
   return (
     <Div_Sidebar>
       <Div_Navigation>
+        {mediaSize.mediaMobile && (
+          <Div_NavItem
+            css={css`
+              padding-right: 0px;
+            `}
+          >
+            <p
+              css={css`
+                color: ${colors.highlight};
+              `}
+            >
+              scroll right
+            </p>
+          </Div_NavItem>
+        )}
+
         <Div_NavItem>
           <A_Styled href={urls.mainpageHome}>home</A_Styled>
         </Div_NavItem>
@@ -51,7 +67,7 @@ const Div_Navigation = styled.div`
 
 const Div_NavItem = styled.div`
   font-size: 20px;
-  padding: 0px 30px;
+  padding: 0px 25px;
 `;
 
 const A_Styled = styled.a`

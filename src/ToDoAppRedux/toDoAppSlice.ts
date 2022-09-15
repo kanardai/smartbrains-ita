@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { generateId } from '../utils/generateId';
-import { useLocalStorage } from '../utils/LocalStorage';
 import { Todo, TodoFilter } from './NewTodo';
 
 const loadStateLocalStorage = (key: string): [] | Todo[] => {
@@ -69,10 +68,25 @@ export const todoAppSlice = createSlice({
       });
       return { ...state, valueFiltered: valueFiltered, filter: filter };
     },
+    changeOrder: (
+      state,
+      action: PayloadAction<{ dragItemId: string; droppedItemId: string }>
+    ) => {
+      const draggedItemIndex = state.value.findIndex(
+        (todo) => todo.id === action.payload.dragItemId
+      );
+      const droppedItemIndex = state.value.findIndex(
+        (todo) => todo.id === action.payload.droppedItemId
+      );
+      const dragItemContent = state.value[draggedItemIndex];
+      state.value.splice(draggedItemIndex, 1);
+      state.value.splice(droppedItemIndex, 0, dragItemContent);
+      saveStateLocalStorage(keyLocalStorage, state.value);
+    },
   },
 });
 
-export const { addTodo, deleteTodo, completeTodo, filteredTodos } =
+export const { addTodo, deleteTodo, completeTodo, filteredTodos, changeOrder } =
   todoAppSlice.actions;
 
 export const todosReducer = todoAppSlice.reducer;

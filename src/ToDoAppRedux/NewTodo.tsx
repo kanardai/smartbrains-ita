@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useRef } from 'react';
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
@@ -13,6 +13,7 @@ import {
   deleteTodo,
   completeTodo,
   filteredTodos,
+  changeOrder,
 } from './toDoAppSlice';
 
 export type Todo = {
@@ -37,6 +38,29 @@ const TodoAppRedux = () => {
   );
   const dispatch = useDispatch<AppDispatch>();
   const [todoName, setTodoName] = useState('');
+
+  const dragItem = useRef('');
+  const dragOverItem = useRef('');
+
+  const dragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+    dragItem.current = id;
+  };
+
+  const dragEnter = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+    dragOverItem.current = id;
+  };
+
+  const drop = (e: React.DragEvent<HTMLDivElement>) => {
+    dispatch(
+      changeOrder({
+        dragItemId: dragItem.current,
+        droppedItemId: dragOverItem.current,
+      })
+    );
+    dragItem.current = '';
+    dragOverItem.current = '';
+    dispatch(filteredTodos());
+  };
 
   const completeTodoButton = (id: string) => {
     dispatch(completeTodo(id));
@@ -77,12 +101,15 @@ const TodoAppRedux = () => {
       </form>
 
       <Div_List>
-        {todosFiltered.map((todoItem) => (
+        {todosFiltered.map((todoItem, index) => (
           <TodoItem
             key={todoItem.id}
             todoItem={todoItem}
             completeTodo={completeTodoButton}
             deleteTodoButton={deleteTodoButton}
+            dragStart={dragStart}
+            dragEnter={dragEnter}
+            dragEnd={drop}
           />
         ))}
       </Div_List>

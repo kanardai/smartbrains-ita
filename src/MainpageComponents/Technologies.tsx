@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import bulbOff from './bulbOff.svg';
-import bulbOn from './bulbOn.svg';
+import bulbOff from './images/bulbOff.svg';
+import bulbOn from './images/bulbOn.svg';
 import { useState } from 'react';
 import { colors, mediaSize } from '../utils/theme';
 
@@ -16,6 +16,7 @@ export const Technologies = () => {
           <Div_TechItem>CSS</Div_TechItem>
           <Div_TechItem>HTML</Div_TechItem>
           <Div_TechItem>GitLab</Div_TechItem>
+          <Div_TechItem>Redux</Div_TechItem>
         </Div_Technologies>
       )}
 
@@ -72,23 +73,26 @@ const Div_TechItem = styled.div`
   text-align: right;
   position: absolute;
   top: 40vh;
-  text-shadow: 0 0 1px ${colors.secondary}, 0 0 20px ${colors.secondary},
-    0 0 30px ${colors.secondary}, 0 0 40px ${colors.secondary};
+  text-shadow: 0 0 1px ${colors.secondary}, 0 0 20px ${colors.secondary};
+
   filter: brightness(120%);
   :nth-child(1) {
-    transform: rotate3d(0, 0, 1, 30deg) translateX(-200px);
+    transform: rotate3d(0, 0, 1, 26deg) translateX(-200px);
   }
   :nth-child(2) {
-    transform: rotate3d(0, 0, 1, 60deg) translateX(-200px);
+    transform: rotate3d(0, 0, 1, 53deg) translateX(-200px);
   }
   :nth-child(3) {
-    transform: rotate3d(0, 0, 1, 90deg) translateX(-200px);
+    transform: rotate3d(0, 0, 1, 81deg) translateX(-200px);
   }
   :nth-child(4) {
-    transform: rotate3d(0, 0, 1, 120deg) translateX(-200px);
+    transform: rotate3d(0, 0, 1, 106deg) translateX(-200px);
   }
   :nth-child(5) {
-    transform: rotate3d(0, 0, 1, 150deg) translateX(-200px);
+    transform: rotate3d(0, 0, 1, 131deg) translateX(-200px);
+  }
+  :nth-child(6) {
+    transform: rotate3d(0, 0, 1, 156deg) translateX(-200px);
   }
 
   @media (${mediaSize.mediaMobile}) {
