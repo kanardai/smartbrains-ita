@@ -1,12 +1,15 @@
 import cors from 'cors';
 import express from 'express';
 import fs from 'fs';
+import swaggerUi from 'swagger-ui-express'
+import swaggerData from '../swagger.json'
 
 const app = express();
 const port = 1234;
 
 app.use(cors());
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerData))
 
 type Article = {
   title: string;

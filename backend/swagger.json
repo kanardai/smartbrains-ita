@@ -1,0 +1,158 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Blog App Server",
+    "description": "This is a sample Blog app Server based on the REST API with Express.js in Node.js.  You can find out more about at [Expressjs.com](https://expressjs.com/)\n\nSome useful links:\n- [Expressjs.com](https://expressjs.com/)\n- [The source API definition for the Blog App](https://github.com/kanardai/smartbrains-ita/tree/main/backend)",
+    "contact": {
+      "name": "Aneta D.",
+      "email": "kanardai@email.cz",
+      "url": "https://www.kanardai.eu/"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "localhost:1234"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Articles",
+      "description": "Articles in the database"
+    },
+    {
+      "name": "Article",
+      "description": "Access to Article"
+    },
+    {
+      "name": "Compare Url",
+      "description": "Comparing existing url of the new Article"
+    }
+  ],
+  "paths": {
+    "/articles": {
+      "get": {
+        "tags": ["Articles"],
+        "summary": "Get List of Articles",
+        "description": "Get List of Articles from the database",
+        "responses": {
+          "200": {
+            "description": "Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Articles"],
+        "summary": "Create a new article",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "body",
+            "description": "Your new Article should look like this.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "urlSlug": {
+                  "type": "string"
+                },
+                "body": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Article added successfully"
+          }
+        }
+      }
+    },
+    "/articles/:urlSlug": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Get Article by Url slug",
+        "responses": {
+          "200": {
+            "description": "Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Article"],
+        "summary": "Delete Article by Url slug",
+        "responses": {
+          "200": {
+            "description": "Article successfully deleted"
+          }
+        }
+      }
+    },
+    "/articles/compare": {
+      "get": {
+        "tags": ["Compare Url"],
+        "summary": "Get Response about already existing Url adress",
+        "responses": {
+          "200": {
+            "description": "Success Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Article": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "urlSlug": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "body": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
