@@ -2,7 +2,7 @@
 
 This Webpage contains a timeline of the Javascript history .
 
-### Built With
+## Built With
 
 - HTML
 - CSS
@@ -10,7 +10,7 @@ This Webpage contains a timeline of the Javascript history .
 - Emotion.sh
 - Visual Studio Code
 
-### Project Screenshot
+## Project Screenshot
 
 ![Project Screenshot](https://i.ibb.co/DLZ2LSm/jshistory.jpg)
 
@@ -21,7 +21,7 @@ This Webpage contains a timeline of the Javascript history .
 - [Emotion.sh](https://emotion.sh/docs/introduction)
 - [Visual Studio Code](https://code.visualstudio.com/docs/languages/markdown)
 
-#### Contact
+### Contact
 
 Aneta Daika - kanardai@email.cz
 Project Link: https://github.com/kanardai/smartbrains-ita/tree/main/src/JSHistory
