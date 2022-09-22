@@ -9,6 +9,8 @@ export const colors = {
 };
 
 export const mediaSize = {
-  mediaMobile: 'max-width: 800px',
-  mediaLaptop: 'min-width: 801px',
+  mobile: 900,
+  mediaMobile: 'max-width: 900px',
+  mediaLaptop: 'min-width: 901px',
+  mediaDesktop: 'min-width: 2500px',
 };

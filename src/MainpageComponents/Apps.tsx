@@ -27,11 +27,18 @@ const Div_Container = styled.div`
   align-items: center;
   justify-content: space-between;
   @media (${mediaSize.mediaMobile}) {
-    transform: scale(0.6);
     width: 300px;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    padding: 5vh 0;
+  }
+  @media (${mediaSize.mediaDesktop}) {
+    transform: scale(2);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
   }
 `;

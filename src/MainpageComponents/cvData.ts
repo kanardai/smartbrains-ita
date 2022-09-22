@@ -37,7 +37,7 @@ export const cvData = [
   },
   {
     cssStyle: colors.secondary,
-    col1: '2016-2022',
+    col1: '2016 - 2022',
     col2: 'Air surveillance and NATO Air Policing',
   },
   {

@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/css';
 import styled from '@emotion/styled';
 import github from './images/github.png';
 import { Link } from 'react-router-dom';
-import { colors } from '../utils/theme';
+import { colors, mediaSize } from '../utils/theme';
 
 type Props = {
   appHeading: string;
@@ -13,14 +14,22 @@ type Props = {
 
 export const AppCard = (p: Props) => {
   return (
-    <div>
-      <a href={p.aHref}>
-        <Img_Github src={github} alt='github' />
-      </a>
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      `}
+    >
+      <Div_Heading>
+        {p.appHeading}
+        <a href={p.aHref}>
+          <Img_Github src={github} alt='github' />
+        </a>
+      </Div_Heading>
+
       <Link_Styled to={p.urlsLink}>
-        <Div_Link imageUrl={p.imgUrl}>
-          <Div_Heading>{p.appHeading}</Div_Heading>
-        </Div_Link>
+        <Div_Link imageUrl={p.imgUrl}></Div_Link>
       </Link_Styled>
     </div>
   );
@@ -29,14 +38,24 @@ export const AppCard = (p: Props) => {
 const Div_Heading = styled.div`
   display: flex;
   justify-content: space-between;
-  font-size: 30px;
-  margin-top: -31px;
+
+  @media (${mediaSize.mediaMobile}) {
+    width: 300px;
+    font-size: 30px;
+    margin-bottom: -10px;
+    padding-top: 50px;
+  }
+  @media (${mediaSize.mediaLaptop}) {
+    margin: 0 30px -40px 30px;
+    width: 220px;
+    font-size: 30px;
+  }
+  @media (${mediaSize.mediaDesktop}) {
+    font-size: 30px;
+  }
 `;
 
 const Img_Github = styled.img`
-  position: relative;
-  top: 25px;
-  left: 220px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -45,6 +64,7 @@ const Img_Github = styled.img`
 const Link_Styled = styled(Link)`
   color: ${colors.secondary};
   text-decoration: none;
+
   &:hover {
     color: ${colors.secondary};
     text-shadow: 0 0 1px ${colors.secondary};
@@ -56,15 +76,21 @@ type Props_Image = {
 };
 
 const Div_Link = styled.div<Props_Image>`
-  margin-top: -50px;
-  width: 220px;
-  height: 220px;
+  @media (${mediaSize.mediaMobile}) {
+    width: 300px;
+    height: 300px;
+  }
+  @media (${mediaSize.mediaLaptop}) {
+    width: 220px;
+    height: 220px;
+    margin: 30px;
+    :hover {
+      box-shadow: 0px 0px 25px 0px ${colors.secondary};
+    }
+  }
+
   border: solid 3px ${colors.secondary};
   border-radius: 8px;
-  margin: 20px 30px;
   background-image: url(${(props) => props.imageUrl});
   background-size: cover;
-  :hover {
-    box-shadow: 0px 0px 25px 0px ${colors.secondary};
-  }
 `;

@@ -37,8 +37,8 @@ const TodoAppRedux = () => {
     (state: RootState) => state.todos.valueFiltered
   );
   const dispatch = useDispatch<AppDispatch>();
+  
   const [todoName, setTodoName] = useState('');
-
   const dragItem = useRef('');
   const dragOverItem = useRef('');
 

@@ -5,6 +5,8 @@ import { colors, mediaSize } from '../utils/theme';
 import foto from './foto.jpg';
 import { cvData } from './cvData';
 
+const pdfCV = require('./images/CV_en_2209.pdf');
+
 export const CV = () => {
   return (
     <Div_Container>
@@ -21,6 +23,25 @@ export const CV = () => {
               cssStyle={data.cssStyle}
             />
           ))}
+          <tr>
+            <td></td>
+            <td>
+              <a
+                href={pdfCV}
+                target='_blank'
+                css={css`
+                  color: ${colors.highlight};
+                  text-decoration: none;
+                  font-size: smaller;
+                  &:hover {
+                    text-shadow: 0 0 2px ${colors.highlight};
+                  }
+                `}
+              >
+                Download CV
+              </a>
+            </td>
+          </tr>
         </tbody>
       </Table_Styled>
     </Div_Container>
@@ -38,23 +59,21 @@ export const TableTr = (p: Props) => {
   return (
     <Tr_Styled>
       <Td_Col1 cssStyle={p.cssStyle}>{p.col1}</Td_Col1>
-      <Td_Col2>
-        {p.col2}
-        <Tr_Empty />
-      </Td_Col2>
+      <Td_Col2>{p.col2}</Td_Col2>
     </Tr_Styled>
   );
 };
 
 const Div_Container = styled.div`
-  /* @media (${mediaSize.mediaLaptop}) { */
-  width: 400px;
-  height: 400px;
   border: solid 4px ${colors.secondary};
   border-radius: 20px;
   box-shadow: 0px 0px 70px 3px ${colors.secondary};
   text-align: center;
-  /* } */
+  width: 430px;
+  height: 430px;
+  @media (${mediaSize.mediaDesktop}) {
+    transform: scale(2);
+  }
   @media (${mediaSize.mediaMobile}) {
     transform: scale(0.7);
   }
@@ -72,16 +91,14 @@ const Img_Face = styled.img`
 
 const Table_Styled = styled.table`
   text-align: left;
-  width: 350px;
-  margin: 10px 20px;
+  width: 400px;
+  margin: 20px 20px;
 `;
 
 const Tr_Styled = styled.tr`
-  line-height: 17px;
+  line-height: 23px;
 `;
-const Tr_Empty = styled.tr`
-  height: 6px;
-`;
+
 type Props_Td_Styled = {
   cssStyle?: string;
 };

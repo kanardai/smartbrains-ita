@@ -39,8 +39,10 @@ const Div_Logo = styled.div`
   border: solid 4px ${colors.secondary};
   border-radius: 10px;
   @media (${mediaSize.mediaMobile}) {
-    margin-left: 30px;
     transform: scale(0.6);
+  }
+  @media (${mediaSize.mediaDesktop}) {
+    transform: scale(2);
   }
 `;
 

@@ -14,7 +14,6 @@ import { MemoryGame } from './MemoryGame/MemoryGame';
 import { BlogApp } from './BlogApp/BlogApp';
 import { BlogAppNewArticle } from './BlogApp/BlogAppNewArticle';
 import { BlogArticle } from './BlogApp/BlogArticle';
-import { HttpFilter } from './HttpFilter/HttpFilter';
 import { ToDoAppRedux } from './ToDoAppRedux/ToDoAppRedux';
 
 injectGlobal`
@@ -37,7 +36,6 @@ root.render(
     <Routes>
       <Route path={urls.mainpage} element={<MainPage />} />
       <Route path={urls.jsHistory} element={<JSHistory />} />
-
       <Route path={urls.toDoAppRedux} element={<ToDoAppRedux />} />
       <Route path={urls.hackerTyper} element={<HackerTyper />} />
       <Route path={urls.mortgageCalculator} element={<MortgageCalculator />} />

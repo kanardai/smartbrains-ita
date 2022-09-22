@@ -23,14 +23,16 @@ export const MainPage = () => {
 
           <ADLogo />
         </Div_Slide>
+
         <Div_Slide id={urls.mainpageIDApps}>
           <Apps />
         </Div_Slide>
-        <Div_Slide id={urls.mainpageIDTechnologies}>
-          <Technologies />
-        </Div_Slide>
+
         <Div_Slide id={urls.mainpageIDCv}>
           <CV />
+        </Div_Slide>
+        <Div_Slide id={urls.mainpageIDTechnologies}>
+          <Technologies />
         </Div_Slide>
       </Div_Container>
     </Div_OuterWrapper>
@@ -38,13 +40,16 @@ export const MainPage = () => {
 };
 
 const Div_Container = styled.div`
-  display: flex;
   @media (${mediaSize.mediaMobile}) {
-    overflow-y: hidden;
-    
   }
 
   @media (${mediaSize.mediaLaptop}) {
+    display: flex;
+    transform: rotate(90deg) translateY(-100vh);
+    transform-origin: top left;
+  }
+  @media (${mediaSize.mediaLaptop}) {
+    display: flex;
     transform: rotate(90deg) translateY(-100vh);
     transform-origin: top left;
   }
@@ -53,7 +58,30 @@ const Div_Container = styled.div`
 const Div_OuterWrapper = styled.div`
   @media (${mediaSize.mediaMobile}) {
   }
+
   @media (${mediaSize.mediaLaptop}) {
+    scroll-behavior: smooth;
+    width: 100vh;
+    min-height: 100vw;
+    transform: rotate(-90deg) translateX(-100vh);
+    transform-origin: top left;
+
+    overflow-x: hidden;
+    position: absolute;
+    scrollbar-width: thin;
+    scrollbar-color: ${colors.highlight} ${colors.primaryDarker};
+    ::-webkit-scrollbar {
+      width: 18px;
+      background-color: ${colors.primaryDarker};
+    }
+    ::-webkit-scrollbar-thumb {
+      background: url(${arrowThumb});
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+  @media (${mediaSize.mediaDesktop}) {
+    scroll-behavior: smooth;
     width: 100vh;
     min-height: 100vw;
     transform: rotate(-90deg) translateX(-100vh);
@@ -78,8 +106,9 @@ const Div_OuterWrapper = styled.div`
 const Div_Slide = styled.div`
   background: ${colors.primaryDarker};
   min-width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  scroll-behavior: smooth;
 `;
