@@ -1,6 +1,8 @@
 # History of Javascript
  
 This Webpage contains a timeline of the Javascript history .
+
+Web: [JS History on kanardai.eu](https://www.kanardai.eu/js-history)
  
 ## Built With (alphabetically)
 

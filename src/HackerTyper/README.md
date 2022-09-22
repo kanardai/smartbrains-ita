@@ -1,6 +1,8 @@
 # HackerTyper
 
 Another Hacker Typer Clone written in Javascript.
+
+Web: [HackerTyper on kanardai.eu](https://www.kanardai.eu/hacker-typer)
  
 ## Built With (alphabetically)
 

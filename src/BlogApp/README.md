@@ -1,8 +1,11 @@
 # Blog App
 
 Simple Blog App. Used own backend created for this app.
+
 Backend info: [kanardai's backend](https://kanardai.eu/api-docs)
 [Backend on GitHub](https://github.com/kanardai/smartbrains-ita/tree/main/backend)
+
+Web: [Blog App on kanardai.eu](https://www.kanardai.eu/blog-app/)
  
 ## Built With (alphabetically)
 

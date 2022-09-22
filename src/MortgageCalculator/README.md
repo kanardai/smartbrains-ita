@@ -1,6 +1,8 @@
 # Mortgage Calculator
 
 Mortgage Calculator let you estimate your monthly loan payment, including amortization and interest. This calculator will show you how inflation has affected your loan.
+
+Web: [Mortgage Calculator on kanardai.eu](https://www.kanardai.eu/mortgage-calculator)
  
 ## Built With (alphabetically)
 

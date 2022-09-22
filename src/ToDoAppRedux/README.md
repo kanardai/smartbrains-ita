@@ -2,7 +2,8 @@
 
  A Todo App made with React And Redux Toolkit.
 Todo App Redux is a todo web app where users can type in their todos. The User's todos are saved in local storage.
- 
+
+Web: [ToDo Redux on kanardai.eu](https://www.kanardai.eu/todo-app-redux) 
 ## Built With (alphabetically)
 
 - CSS

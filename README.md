@@ -1,6 +1,9 @@
 # React Portfolio
  
-This Portfolio is a final project of IT Absolvent Smartbrains solutions s. r. o. 
+This Portfolio is a final project of IT Absolvent Smartbrains solutions s. r. o.
+ 
+Web: [www.kanardai.eu](www.kanardai.eu)
+GitHub repository: [kanardai/smartbrains-ita](https://github.com/kanardai/smartbrains-ita)
 
 ## Built With (alphabetically)
 
